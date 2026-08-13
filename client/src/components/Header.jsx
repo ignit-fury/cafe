@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { HiMenu, HiX } from 'react-icons/hi'
-import { AuthContext } from '../context/AuthContext'
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -12,7 +11,6 @@ const navLinks = [
 
 export default function Header() {
   const [open, setOpen] = useState(false)
-  const { user, logout } = useContext(AuthContext)
   const location = useLocation()
 
   return (
@@ -39,14 +37,7 @@ export default function Header() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
-          {user ? (
-            <>
-              <Link to="/admin" className="btn-primary text-sm">Dashboard</Link>
-              <button onClick={logout} className="btn-ghost text-sm">Logout</button>
-            </>
-          ) : (
-            <Link to="/admin/login" className="btn-ghost text-sm">Admin</Link>
-          )}
+          <Link to="/admin" className="btn-ghost text-sm">Admin</Link>
         </div>
 
         {/* Mobile menu button */}
@@ -72,15 +63,8 @@ export default function Header() {
                 {label}
               </Link>
             ))}
-            <div className="border-t border-outline-variant/30 mt-2 pt-2 flex flex-col gap-1">
-              {user ? (
-                <>
-                  <Link to="/admin" onClick={() => setOpen(false)} className="px-4 py-3 rounded-lg font-body text-sm font-medium text-secondary">Dashboard</Link>
-                  <button onClick={() => { logout(); setOpen(false) }} className="px-4 py-3 rounded-lg font-body text-sm font-medium text-on-surface-variant text-left">Logout</button>
-                </>
-              ) : (
-                <Link to="/admin/login" onClick={() => setOpen(false)} className="px-4 py-3 rounded-lg font-body text-sm font-medium text-on-surface-variant">Admin Login</Link>
-              )}
+            <div className="border-t border-outline-variant/30 mt-2 pt-2">
+              <Link to="/admin" onClick={() => setOpen(false)} className="px-4 py-3 rounded-lg font-body text-sm font-medium text-on-surface-variant block">Admin</Link>
             </div>
           </nav>
         </div>

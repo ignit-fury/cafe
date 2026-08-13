@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from '../api'
-import { AuthContext } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
-import { FiGrid, FiCoffee, FiShoppingBag, FiCalendar, FiStar, FiPlus, FiTrash2, FiEdit2, FiX, FiLogOut, FiCheck, FiClock, FiRefreshCw } from 'react-icons/fi'
+import { FiGrid, FiCoffee, FiShoppingBag, FiCalendar, FiStar, FiPlus, FiTrash2, FiEdit2, FiX, FiCheck, FiClock, FiRefreshCw } from 'react-icons/fi'
 
 const tabs = [
   { key: 'overview', label: 'Overview', icon: FiGrid },
@@ -34,8 +32,6 @@ export default function Admin() {
   const [menuForm, setMenuForm] = useState({ ...emptyMenuItem })
   const [editingId, setEditingId] = useState(null)
   const [showMenuForm, setShowMenuForm] = useState(false)
-  const { user, logout } = useContext(AuthContext)
-  const navigate = useNavigate()
 
   const fetchData = async () => {
     setLoading(true)
@@ -125,11 +121,8 @@ export default function Admin() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-display font-bold text-primary">Admin Dashboard</h1>
-            <p className="text-sm text-on-surface-variant">Welcome back, {user?.user?.name || 'Admin'}</p>
+            <p className="text-sm text-on-surface-variant">Manage your cafe</p>
           </div>
-          <button onClick={handleLogout} className="btn-ghost text-sm text-error flex items-center gap-1.5">
-            <FiLogOut size={16} /> Logout
-          </button>
         </div>
 
         {/* Tabs */}

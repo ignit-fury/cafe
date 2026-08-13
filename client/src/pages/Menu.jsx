@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from '../api'
 import { FiMinus, FiPlus, FiShoppingCart, FiX } from 'react-icons/fi'
-import { AuthContext } from '../context/AuthContext'
-import { useNavigate } from 'react-router-dom'
 
 const categories = ['all', 'sandwiches', 'wraps', 'fries', 'burgers', 'pizza', 'pasta', 'mojitos', 'frappe']
 
@@ -14,8 +12,6 @@ export default function Menu() {
   const [showCart, setShowCart] = useState(false)
   const [orderForm, setOrderForm] = useState({ customerName: '', phone: '', deliveryType: 'Takeaway' })
   const [orderMsg, setOrderMsg] = useState('')
-  const { user } = useContext(AuthContext)
-  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get('/api/menu')
